@@ -8,5 +8,5 @@ public class APIs {
     public static final String DRIBBBLE_CLIENT_ACCESS_TOKEN = "29d3d21640a6f67409657d1a767cbdd07e8c016780b8bfcebb2d411d93d230cd";
 
     public static final String HOST =   "https://api.dribbble.com/v1";
-    public static final String URL_CONTENT = HOST+"/shots";
+    public static final String URL_CONTENT = HOST+"/shots?per_page=30";
 }

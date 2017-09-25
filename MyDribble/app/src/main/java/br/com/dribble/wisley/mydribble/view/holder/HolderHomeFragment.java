@@ -1,5 +1,6 @@
 package br.com.dribble.wisley.mydribble.view.holder;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -25,7 +26,8 @@ public class HolderHomeFragment extends AbstractHolderFragment {
     @Override
     protected void initializeActions() {
         rvBody.setHasFixedSize(true);
-        rvBody.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        rvBody.setLayoutManager(mLayoutManager);
         rvBody.setNestedScrollingEnabled(false);
     }
 

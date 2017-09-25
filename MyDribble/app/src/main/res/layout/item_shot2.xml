@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/color_white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextEditorialItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="SOCIEDADE" />
+
+    <ImageView
+        android:id="@+id/ivThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_gravity="center|center_vertical"
+        android:layout_margin="10dp"
+        android:background="@drawable/img_default"
+        android:gravity="center|center_vertical"
+        android:orientation="vertical"
+        android:padding="3dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivThumbnail"
+        android:layout_marginBottom="11dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivThumbnail"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/views" />
+
+            <TextView
+                android:id="@+id/tvViewsCount"
+                style="@style/viewscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3456" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/DateCreated"
+                android:id="@+id/tvCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/ivThumbnail"
+                android:layout_alignLeft="@id/tvView"
+                android:text="Creado em 25 de marco" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
