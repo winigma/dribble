@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment implements IPresenterShot {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        //mHolder = new HolderHomeFragment(view);
+        mHolder = new HolderHomeFragment(view);
 
         return view;
     }

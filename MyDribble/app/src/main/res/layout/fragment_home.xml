@@ -16,10 +16,13 @@
             android:layout_height="wrap_content">
 
 
-            <TextView
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvBody"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hello World!" />
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/item_shot"
+               />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
