@@ -8,6 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.transition.Fade;
+import android.transition.TransitionInflater;
+import android.transition.TransitionSet;
+import android.view.View;
+
+import br.com.dribble.wisley.mydribble.R;
 
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
@@ -16,6 +22,9 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
  * This provides methods to help Activities load their UI.
  */
 public class ActivityUtils {
+
+    private static final long MOVE_DEFAULT_TIME = 1000;
+    private static final long FADE_DEFAULT_TIME = 300;
 
     /**
      * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
@@ -64,12 +73,41 @@ public class ActivityUtils {
      * and added the old fragment to the backstack.
      * The operation is performed by the {@code fragmentManager}.
      */
-    public static void replaceFragmentToActivityWithBackStack(@NonNull FragmentManager fragmentManager,
+    public static void replaceFragmentToActivityWithBackStack(Fragment previousFrag,@NonNull FragmentManager fragmentManager,
                                                               @NonNull Fragment fragment, int frameId) {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // 1. Exit for Previous Fragment
+        Fade exitFade = new Fade();
+        exitFade.setDuration(FADE_DEFAULT_TIME);
+        previousFrag.setExitTransition(exitFade);
+
+
+        // 2. Shared Elements Transition
+        TransitionSet enterTransition = new TransitionSet();
+        enterTransition.addTransition(TransitionInflater.from(previousFrag.getActivity()).inflateTransition(android.R.transition.move));
+        enterTransition.setDuration(MOVE_DEFAULT_TIME);
+        enterTransition.setStartDelay(FADE_DEFAULT_TIME);
+        fragment.setSharedElementEnterTransition(enterTransition);
+
+        /*// 3. Enter Transition for New Fragment
+        Fade enterFade = new Fade();
+        enterFade.setStartDelay(MOVE_DEFAULT_TIME + FADE_DEFAULT_TIME);
+        enterFade.setDuration(FADE_DEFAULT_TIME);
+        fragment.setEnterTransition(enterFade);*/
+
+        View logo = previousFrag.getActivity().findViewById(R.id.ivThumbnail);
+        transaction.addSharedElement(logo, logo.getTransitionName());
+
+
+
+
+
         transaction.replace(frameId, fragment);
+
         transaction.addToBackStack(null);
         transaction.commit();
     }

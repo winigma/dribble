@@ -1,5 +1,6 @@
 package br.com.dribble.wisley.mydribble.view.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment implements IPresenterShot, OnClickSho
     private PresenterShot mPresenter;
     HolderHomeFragment mHolder;
     private ShotAdapter mAdapter;
+    ProgressDialog dialog;
 
 
     @Override
@@ -65,11 +67,16 @@ public class HomeFragment extends Fragment implements IPresenterShot, OnClickSho
     @Override
     public void notifyError(ErrorResponse errorResponse) {
         Toast.makeText(getActivity(), "Error!!!", Toast.LENGTH_LONG).show();
+        dialog.hide();
     }
 
     @Override
     public void notifyStart() {
-
+        dialog=new ProgressDialog(getActivity());
+        dialog.setMessage("Loading...");
+        dialog.setCancelable(false);
+        dialog.setInverseBackgroundForced(false);
+        dialog.show();
     }
 
     @Override
@@ -78,6 +85,7 @@ public class HomeFragment extends Fragment implements IPresenterShot, OnClickSho
         //Toast.makeText(getActivity(),"Sucesso!!!",Toast.LENGTH_LONG).show();
         this.mAdapter = new ShotAdapter(reponse, this);
         this.mHolder.getRvBody().setAdapter(this.mAdapter);
+        dialog.hide();
     }
 
     @Override
@@ -88,7 +96,7 @@ public class HomeFragment extends Fragment implements IPresenterShot, OnClickSho
         bundle.putParcelable(ShotDetailFragmet.KEY_SHOT, bo);
         ShotDetailFragmet frag = new ShotDetailFragmet();
         frag.setArguments(bundle);
-        ActivityUtils.replaceFragmentToActivityWithBackStack(getActivity().
+        ActivityUtils.replaceFragmentToActivityWithBackStack(this,getActivity().
                 getSupportFragmentManager(), frag, R.id.home_container);
 
     }
